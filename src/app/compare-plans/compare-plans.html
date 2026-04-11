@@ -1,4 +1,4 @@
-<div class="flex flex-col lg:flex-row gap-8 max-w-[1200px] h-full mx-auto p-8 font-sans">
+<!-- <div class="flex flex-col lg:flex-row gap-8 max-w-[1200px] h-full mx-auto p-8 font-sans">
   <div class="flex-1 overflow-x-auto">
     <div class="min-w-[800px] relative bg-white mt-10">
 
@@ -112,6 +112,115 @@
         }
       </div>
 
+    </div>
+  </div>
+</div> -->
+
+
+<div class="flex flex-col lg:flex-row gap-8 max-w-[1200px] h-full mx-auto p-8 font-sans text-[#101828]">
+
+  <div class="flex-1 overflow-x-auto">
+    <div class="min-w-[800px] bg-white mt-10">
+      <div class="grid grid-cols-[1.5fr_repeat(4,1fr)] relative">
+        <div class="p-6 bg-white">
+          <div class="flex-none w-full lg:w-[250px]">
+            <h3 class="text-sm text-gray-500 mb-6 font-medium">Select your plan duration:</h3>
+            <div class="flex flex-row lg:flex-col flex-wrap gap-2">
+              @for(d of durations; track d.id) {
+              <label
+                class="flex items-center gap-3 cursor-pointer p-2 px-3 rounded-full transition-all group hover:bg-gray-50"
+                (click)="selectDuration(d.id)">
+                <div class="relative w-5 h-5 shrink-0">
+                  <input type="radio" name="duration" [checked]="selectedDuration === d.id" class="hidden">
+                  <div class="w-5 h-5 rounded-full border flex items-center justify-center transition-all"
+                    [class.border-[#B32D7D]]="selectedDuration === d.id"
+                    [class.border-gray-300]="selectedDuration !== d.id">
+                    @if(selectedDuration === d.id) {
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#B32D7D]"></div>
+                    }
+                  </div>
+                </div>
+                <span class="font-medium text-sm transition-colors ">
+                  {{ d.label }}
+                </span>
+                @if(d.discount) {
+                <span class="bg-blue-50 text-blue-600 text-[10px] px-2 py-0.5 rounded-full font-bold ml-1">
+                  {{ d.discount }}
+                </span>
+                }
+              </label>
+              }
+            </div>
+          </div>
+        </div>
+
+        @for(plan of plans; track plan.id; let firstPlan = $first; let lastPlan = $last) {
+        <div class="p-8 {{firstPlan ? 'rounded-tl-xl' : ''}} px-2 pb-6 text-center relative flex flex-col items-center border-t border-l border-[#E4E7EC] bg-white
+             {{ lastPlan ? 'border-r rounded-tr-xl' : '' }}
+             {{ plan.isRecommended ? '!border-x !border-t !border-[#B32D7D] z-10' : '' }}">
+
+          @if(plan.isCurrent) {
+          <span
+            class="min-w-[120px] absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-bold bg-white border border-gray-200 text-gray-400 shadow-sm uppercase">Current
+            Plan</span>
+          } @else if(plan.isRecommended) {
+          <span
+            class="min-w-[120px] absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-bold bg-white border border-[#B32D7D] text-[#B32D7D] shadow-sm uppercase">Recommended</span>
+          }
+
+          <h4 class="text-xl font-bold text-[#101828] mt-4 mb-3">{{ plan.name }}</h4>
+          <div class="mb-6 text-[#B32D7D] flex items-baseline justify-center font-bold">
+            <span class="text-xl mr-0.5">৳</span>
+            <span class="text-4xl">{{ getPlanPrice(plan) }}</span>
+          </div>
+
+          @if(plan.upgradeText) {
+          <button
+            class="bg-[#00965e] text-white py-2.5 px-6 rounded-lg font-bold hover:bg-[#007a4d] transition-colors w-[90%] text-sm uppercase">
+            {{ plan.upgradeText }}
+          </button>
+          } @else { <div class="h-[40px]"></div> }
+        </div>
+        }
+
+        <!-- Feature Rows -->
+        @for(feature of features; track feature.name; let isLastFeature = $last) {
+        <!-- Label Column -->
+        <div class="p-5 {{$index == 0 ? 'rounded-tl-xl' : ''}} px-6 flex items-center gap-2 font-semibold text-[13px] text-gray-700 border-t border-l border-[#E4E7EC] bg-white
+               {{ isLastFeature ? 'border-b rounded-bl-xl' : '' }}">
+          <span class="underline decoration-dotted underline-offset-4 cursor-help">{{ feature.name }}</span>
+          @if(feature.isNew) {
+          <span class="bg-blue-50 text-blue-500 text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase">New</span>
+          }
+        </div>
+        @for(val of feature.values; track $index; let lastCol = $last) {
+        <div class="p-5 text-center flex items-center justify-center border-t border-l border-[#E4E7EC] text-sm font-medium bg-white
+               {{ lastCol ? 'border-r' : '' }}
+               {{ isLastFeature ? 'border-b' : '' }}
+               {{ isLastFeature && lastCol ? 'rounded-br-xl' : '' }}
+               {{ plans[$index].isRecommended ? '!border-x-1 !border-[#B32D7D] z-10' : '' }}
+               {{ plans[$index].isRecommended && isLastFeature ? '!border-b-1 rounded-b-xl' : '' }}">
+
+          @if(val === true) {
+          <span class="text-[#B32D7D] bg-pink-50 rounded-full p-1 shadow-sm">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </span>
+          } @else if(val === false) {
+          <span class="text-gray-200"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="3">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg></span>
+          } @else {
+          <span class="text-gray-900 font-bold">{{ val }}</span>
+          }
+        </div>
+        }
+        }
+      </div>
     </div>
   </div>
 </div>
