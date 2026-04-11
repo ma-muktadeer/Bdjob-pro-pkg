@@ -2,10 +2,11 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PricingPlanInterface } from './interfaces/card.interfaces';
 import { PricingPlan } from "./pricing-plan/pricing-plan";
+import { ComparePlans } from "./compare-plans/compare-plans";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PricingPlan],
+  imports: [RouterOutlet, PricingPlan, ComparePlans],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

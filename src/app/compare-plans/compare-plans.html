@@ -1,0 +1,117 @@
+<div class="flex flex-col lg:flex-row gap-8 max-w-[1200px] h-full mx-auto p-8 font-sans">
+  <div class="flex-1 overflow-x-auto">
+    <div class="min-w-[800px] relative bg-white mt-10">
+
+      <div class="absolute top-0 bottom-0 left-[65.8%] w-[17%] border border-[#B32D7D] pointer-events-none z-0">
+
+      </div>
+
+      <div class="grid grid-cols-[1.5fr_repeat(4,1fr)] relative z-10">
+        <div class="p-6">
+          <div class="flex-none border-none w-full lg:w-[250px]">
+            <h3 class="text-sm text-gray-500 mb-6 font-medium">Select your plan duration:</h3>
+            <div class="flex flex-row lg:flex-col flex-wrap gap-2">
+              @for(d of durations; track d.id) {
+              <label class="flex items-center gap-3 cursor-pointer p-2 px-3 rounded-full transition-colors group"
+                (click)="selectDuration(d.id)">
+                <div class="relative w-5 h-5 shrink-0">
+                  <input type="radio" name="duration" [checked]="selectedDuration === d.id" class="hidden">
+                  <div
+                    class="w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all {{selectedDuration === d.id ? 'border-[#B32D7D]' : 'border-gray-300'}}">
+                    @if(selectedDuration === d.id) {
+                    <div class="w-2.5 h-2.5 rounded-full bg-[#B32D7D]"></div>
+                    }
+                  </div>
+                </div>
+                <span
+                  class="font-medium text-sm transition-colors {{selectedDuration === d.id ? 'text-[#B32D7D]' : 'text-gray-800'}}">
+                  {{ d.label }}
+                </span>
+                @if(d.discount) {
+                <span class="bg-blue-50 text-blue-600 text-[10px] px-2 py-0.5 rounded-full font-bold ml-1">
+                  Save {{ d.discount }}
+                </span>
+                }
+              </label>
+              }
+            </div>
+          </div>
+        </div>
+        @for(plan of plans; track plan.id) {
+        <div
+          class="border-t border-l {{$index == 0 ? 'border-t rounded-tl-xl': $last ? ' border-r rounded-tr-xl' : ''}} border-[#E4E7EC] p-8 px-2 pb-6 text-center relative flex flex-col items-center">
+          @if(plan.isCurrent) {
+          <span class="min-w-[130px] absolute -top-3 left-1/2 -translate-x-1/2 
+                 px-5 py-1 rounded-full text-[10px] font-bold 
+                 bg-white border border-gray-200 text-gray-400 shadow-sm">
+            Current Plan
+          </span>
+          }
+          @else if(plan.isRecommended) {
+          <span class="min-w-[130px] absolute -top-3 left-1/2 -translate-x-1/2 
+                   px-5 py-1 rounded-full text-[10px] font-bold 
+                   bg-white border border-[#B32D7D] text-[#B32D7D] shadow-sm">
+            Recommended
+          </span>
+          }
+
+          <h4 class="text-xl font-bold text-[#101828] mt-6 mb-4">{{ plan.name }}</h4>
+
+          <div class="mb-6 text-[#B32D7D] flex items-baseline justify-center font-bold">
+            <span class="text-xl mr-0.5">৳</span>
+            <span class="text-4xl">{{ getPlanPrice(plan) }}</span>
+          </div>
+
+          @if(plan.upgradeText) {
+          <button
+            class="bg-[#00965e] text-white py-2.5 px-8 rounded-lg font-bold hover:bg-[#007a4d] transition-colors w-[90%] text-sm">
+            {{ plan.upgradeText }}
+          </button>
+          }
+
+        </div>
+        }
+        @for(feature of features; track feature.name; let fl = $last) {
+        <div
+          class="border-t border-l {{$first ? 'rounded-tl-xl' : $last ? 'border-b rounded-bl-xl' : ''}} border-[#E4E7EC] p-4 px-6 flex items-center gap-2 font-medium text-xs text-gray-700">
+          <span class="underline decoration-dotted underline-offset-4 cursor-help">{{ feature.name }}</span>
+          @if(feature.isNew) {
+          <span class="bg-blue-50 text-blue-500 text-[9px] px-1.5 py-0.5 rounded-full font-bold">New</span>
+          }
+          @if(feature.hasTooltip) {
+          <span class="text-gray-400 opacity-50"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg></span>
+          }
+        </div>
+
+        @for(val of feature.values; track $index) {
+        <div
+          class="border-t border-l {{fl ? 'border-b' : ''}} {{fl && $last ? 'border-r  rounded-br-xl' : $last ? 'border-r' :  ''}} border-[#E4E7EC] p-4 text-center flex items-center justify-center text-xs font-medium text-gray-600">
+          @if(val === true) {
+          <span class="text-pink-100 bg-pink-50 rounded-full p-0.5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B32D7D" stroke-width="4"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </span>
+          } @else if(val === false) {
+          <span class="text-gray-300"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="3">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg></span>
+          } @else {
+          <span class="text-gray-800">{{ val }}</span>
+          }
+        </div>
+        }
+        }
+      </div>
+
+    </div>
+  </div>
+</div>
