@@ -165,7 +165,7 @@
             Plan</span>
           } @else if(plan.isRecommended) {
           <span
-            class="min-w-[120px] absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-bold bg-white border border-[#B32D7D] text-[#B32D7D] shadow-sm uppercase">Recommended</span>
+            class="min-w-[120px] absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-[10px] font-bold bg-[#FCF3FA] border border-[#F6D4ED] text[#B32D7D] shadow-sm uppercase">Recommended</span>
           }
 
           <h4 class="text-xl font-bold text-[#101828] mt-4 mb-3">{{ plan.name }}</h4>
@@ -185,7 +185,6 @@
 
         <!-- Feature Rows -->
         @for(feature of features; track feature.name; let isLastFeature = $last) {
-        <!-- Label Column -->
         <div class="p-5 {{$index == 0 ? 'rounded-tl-xl' : ''}} px-6 flex items-center gap-2 font-semibold text-[13px] text-gray-700 border-t border-l border-[#E4E7EC] bg-white
                {{ isLastFeature ? 'border-b rounded-bl-xl' : '' }}">
           <span class="underline decoration-dotted underline-offset-4 cursor-help">{{ feature.name }}</span>
@@ -198,14 +197,29 @@
                {{ lastCol ? 'border-r' : '' }}
                {{ isLastFeature ? 'border-b' : '' }}
                {{ isLastFeature && lastCol ? 'rounded-br-xl' : '' }}
-               {{ plans[$index].isRecommended ? '!border-x-1 !border-[#B32D7D] z-10' : '' }}
-               {{ plans[$index].isRecommended && isLastFeature ? '!border-b-1 rounded-b-xl' : '' }}">
+               {{ plans[$index].isRecommended ? '!border-x !border-t-[#E4E7EC] !border-[#C63C92] relative z-20' : '' }}
+               {{ plans[$index].isRecommended && isLastFeature ? '!border-b' : '' }}">
+          <!-- <div class="p-5 text-center flex items-center justify-center border-t border-l border-[#E4E7EC] text-sm font-medium bg-white
+            {{ lastCol ? 'border-r' : '' }}
+            {{ isLastFeature ? 'border-b' : '' }}
+            {{ isLastFeature && lastCol ? 'rounded-br-xl' : '' }}
+            {{ plans[$index].isRecommended ? '!border-x !border-[#B32D7D] z-20 relative' : '' }}
+            {{ plans[$index].isRecommended && isLastFeature ? '!border-b-2 rounded-b-xl' : '' }}"> -->
+
 
           @if(val === true) {
-          <span class="text-[#B32D7D] bg-pink-50 rounded-full p-1 shadow-sm">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
+          <span class="text-[#B32D7D] max-h-[24px] max-w-[24px] rounded-full shadow-sm">
+            <!-- <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"
               stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"></polyline>
+            </svg> -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12Z"
+                fill="#FAE9F6" />
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M17.098 7.39004L9.93797 14.3L8.03797 12.27C7.68797 11.94 7.13797 11.92 6.73797 12.2C6.34797 12.49 6.23797 13 6.47797 13.41L8.72797 17.07C8.94797 17.41 9.32797 17.62 9.75797 17.62C10.168 17.62 10.558 17.41 10.778 17.07C11.138 16.6 18.008 8.41004 18.008 8.41004C18.908 7.49004 17.818 6.68004 17.098 7.38004V7.39004Z"
+                fill="#C63C92" />
             </svg>
           </span>
           } @else if(val === false) {
