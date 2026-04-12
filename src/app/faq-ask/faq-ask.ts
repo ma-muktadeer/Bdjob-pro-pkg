@@ -22,6 +22,6 @@ export class FaqAsk {
   ];
 
   toggleAccordion(index: number) {
-    this.activeIndex.set(this.activeIndex() === index ? null : index);
+    this.activeIndex.update((value) => value === index ? null : index);
   }
 }

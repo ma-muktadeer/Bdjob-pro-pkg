@@ -5,10 +5,12 @@ import { PricingPlan } from "./pricing-plan/pricing-plan";
 import { ComparePlans } from "./compare-plans/compare-plans";
 import { CareerGrid } from "./career-grid/career-grid";
 import { FaqAsk } from "./faq-ask/faq-ask";
+import { FeedbackDrawer } from "./feedback-drawer/feedback-drawer";
+import { FeedbackForm } from "./feedback-form/feedback-form";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PricingPlan, ComparePlans, CareerGrid, FaqAsk],
+  imports: [RouterOutlet, FeedbackForm, PricingPlan, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -52,4 +54,12 @@ export class App {
       ]
     },
   ];
+
+  // Define the state as a signal
+  isDrawerOpen = signal(false);
+
+  toggleDrawer() {
+    // Toggle the signal value
+    this.isDrawerOpen.update(value => !value);
+  }
 }

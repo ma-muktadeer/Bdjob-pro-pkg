@@ -1,18 +1,18 @@
 <div class="max-w-7xl mx-auto p-8 py-16 font-sans">
-    <div class="grid grid-cols-2 gap-12">
-        <div>
-            <h2 class="text-[36px] leading-[44px] font-semibold tracking-[-0.72px] text-[#101828] font-['Inter']">
+    <div class="flex gap-24">
+        <div class="w-full">
+            <h2 class="text-[36px] leading-[44px] font-semibold tracking-[-0.72px] text-[#101828]">
                 Frequently asked<br>questions
             </h2>
         </div>
-        <div class="divide-y divide-[#E4E7EC]">
+        <div class="divide-y divide-[#E4E7EC] min-w-[590px]">
             @for(faq of faqs; track $index) {
             <div class="first:pt-0 group">
                 <button (click)="toggleAccordion($index)"
                     class="w-full flex items-center justify-between text-left focus:outline-none py-4">
 
-                    <span class="text-xl font-semibold text-[#101828]" ]="activeIndex() === $index"
-                        ]="activeIndex() !== $index">
+                    <span class="text-xl font-semibold text-[#101828]"
+                        [class.text-[#007BFF]]="activeIndex() === $index">
                         {{ faq.question }}
                     </span>
 
