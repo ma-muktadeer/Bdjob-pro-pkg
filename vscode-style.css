@@ -1,0 +1,125 @@
+/* =============================================
+   VS Code Custom Cursor — Expand + Dynamic Color
+   - Center থেকে grow/shrink (expand effect)
+   - Color শুধু hide phase এ change হয়
+   ============================================= */
+
+/* Expand: center থেকে দুই দিকে grow/shrink */
+@keyframes expandCursor {
+    0% {
+        transform: scaleY(0);
+        transform-origin: center;
+        opacity: 0;
+    }
+
+    10% {
+        transform: scaleY(1);
+        transform-origin: center;
+        opacity: 1;
+    }
+
+    82% {
+        transform: scaleY(1);
+        transform-origin: center;
+        opacity: 1;
+    }
+
+    95% {
+        transform: scaleY(0);
+        transform-origin: center;
+        opacity: 0;
+    }
+
+    100% {
+        transform: scaleY(0);
+        transform-origin: center;
+        opacity: 0;
+    }
+}
+
+/* Color: steps(6, start) দিয়ে শুধু hidden phase এ jump করে
+   Duration = expandCursor(3s) × 6 colors = 18s */
+@keyframes colorCycle {
+    0% {
+        background-color: #00E5FF;
+        box-shadow: 0 0 8px 2px #00E5FF88;
+    }
+
+    /* Cyan    */
+    16.67% {
+        background-color: #FF00FF;
+        box-shadow: 0 0 8px 2px #FF00FF88;
+    }
+
+    /* Magenta */
+    33.33% {
+        background-color: #FFD700;
+        box-shadow: 0 0 8px 2px #FFD70088;
+    }
+
+    /* Gold    */
+    50% {
+        background-color: #39FF14;
+        box-shadow: 0 0 8px 2px #39FF1488;
+    }
+
+    /* Lime    */
+    66.67% {
+        background-color: #FF6600;
+        box-shadow: 0 0 8px 2px #FF660088;
+    }
+
+    /* Orange  */
+    83.33% {
+        background-color: #BF5FFF;
+        box-shadow: 0 0 8px 2px #BF5FFF88;
+    }
+
+    /* Violet  */
+    100% {
+        background-color: #00E5FF;
+        box-shadow: 0 0 8px 2px #00E5FF88;
+    }
+
+    /* Cyan    */
+}
+
+.cursor {
+    border: none !important;
+    background-image: none !important;
+    border-radius: 1px !important;
+    width: 2px !important;
+
+    animation:
+        expandCursor 1.5s ease-in-out infinite,
+        colorCycle 9s steps(6, start) infinite !important;
+}
+
+/* Selection Animation */
+@keyframes selectionRainbow {
+
+    0% {
+        background-color: #00E5FF44;
+    }
+
+    33% {
+        background-color: #FF00FF44;
+    }
+
+    66% {
+        background-color: #39FF1444;
+    }
+
+    100% {
+        background-color: #00E5FF44;
+    }
+
+}
+
+/* This targets the selection blocks in the editor */
+.monaco-editor .selected-text {
+    animation: selectionRainbow 5s ease-in-out infinite !important;
+    /* animation: 1.5s ease-in-out infinite,
+        colorCycle 9s steps(6, start) infinite !important;
+    ; */
+}
