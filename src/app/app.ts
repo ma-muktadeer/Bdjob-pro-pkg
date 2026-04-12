@@ -4,10 +4,11 @@ import { PricingPlanInterface } from './interfaces/card.interfaces';
 import { PricingPlan } from "./pricing-plan/pricing-plan";
 import { ComparePlans } from "./compare-plans/compare-plans";
 import { CareerGrid } from "./career-grid/career-grid";
+import { FaqAsk } from "./faq-ask/faq-ask";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, PricingPlan, ComparePlans, CareerGrid],
+  imports: [RouterOutlet, PricingPlan, ComparePlans, CareerGrid, FaqAsk],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

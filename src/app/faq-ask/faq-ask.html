@@ -1,0 +1,49 @@
+<div class="max-w-7xl mx-auto p-8 py-16 font-sans">
+    <div class="grid grid-cols-2 gap-12">
+        <div>
+            <h2 class="text-[36px] leading-[44px] font-semibold tracking-[-0.72px] text-[#101828] font-['Inter']">
+                Frequently asked<br>questions
+            </h2>
+        </div>
+        <div class="divide-y divide-[#E4E7EC]">
+            @for(faq of faqs; track $index) {
+            <div class="first:pt-0 group">
+                <button (click)="toggleAccordion($index)"
+                    class="w-full flex items-center justify-between text-left focus:outline-none py-4">
+
+                    <span class="text-xl font-semibold text-[#101828]" ]="activeIndex() === $index"
+                        ]="activeIndex() !== $index">
+                        {{ faq.question }}
+                    </span>
+
+                    <span class="text-gray-400 transition-transform duration-300"
+                        [class.rotate-180]="activeIndex() === $index">
+                        @if(activeIndex() === $index) {
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        } @else {
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        }
+                    </span>
+                </button>
+                <div class="grid transition-all duration-300 ease-in-out"
+                    [class.grid-rows-[1fr]]="activeIndex() === $index"
+                    [class.grid-rows-[0fr]]="activeIndex() !== $index" [class.opacity-100]="activeIndex() === $index"
+                    [class.opacity-0]="activeIndex() !== $index">
+                    <div class="overflow-hidden">
+                        <p class="pt-2 pb-4 text-base text-[#475467] leading-relaxed">
+                            {{ faq.answer }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>
