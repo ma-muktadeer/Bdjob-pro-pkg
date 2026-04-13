@@ -1,102 +1,77 @@
 <div class="{{plan().badge === 'Recommended' 
         ? 'bg-pink-50 border-[#F6D4ED] bg-[linear-gradient(0deg,rgba(255,255,255,0.3)_0%,rgba(255,255,255,0.3)_100%),#FCF3FA]'
         : 'bg-white border-[#E4E7EC]'}} 
-    relative flex flex-col gap-6 p-6 border rounded-xl shadow-sm cursor-pointer 
+    relative flex flex-col gap-6 p-6 border rounded-2xl shadow-sm cursor-pointer 
     transition-all duration-300 ease-in-out
     hover:shadow-[0_169px_47px_0_rgba(120,120,120,0),0_108px_43px_0_rgba(120,120,120,0.04),0_61px_37px_0_rgba(120,120,120,0.13),0_27px_27px_0_rgba(120,120,120,0.21),0_7px_15px_0_rgba(120,120,120,0.25)] 
-    hover:-translate-y-1">
+    hover:-translate-y-1 h-full min-w-0">
+    
     @if(plan().badge){
     <span
-        class="absolute -top-4 left-2/9 -translate-x-1/2 px-3 py-1 text-xs font-medium rounded-full
-    {{plan().badge === 'Recommended' ? 'text-sm font-medium text-center border border-[#F6D4ED] bg-pink-100 text-[#B32D7D] text-[14px]' : 'bg-gray-100 text-gray-600'}}">
-        {{
-        plan().badge }}
+        class="absolute -top-[14px] left-1/2 -translate-x-1/2 px-4 py-1 text-[13px] font-semibold rounded-full whitespace-nowrap
+    {{plan().badge === 'Recommended' ? 'border border-[#F6D4ED] bg-white text-[#B32D7D] shadow-sm' : 'bg-gray-100 text-gray-600'}}">
+        {{ plan().badge }}
     </span>
     }
-    <div class="flex flex-col gap-5">
-        <div class="flex flex-col gap-3">
-            <div class="flex items-center justify-start gap-2">
-                <h3 class="text-2xl font-semibold text-[#101828]"> {{ plan().title }}</h3>
+
+    <div class="flex flex-col gap-4 pt-1">
+        <div class="flex flex-col gap-2">
+            <div class="flex items-center justify-between gap-2">
+                <h3 class="text-[20px] font-semibold text-[#1D2939]"> {{ plan().title }}</h3>
                 @if(plan().savings){
-                <span class="text-xs font-semibold text-blue-500 bg-blue-50 px-2 py-0.5 rounded">Save {{
-                    plan().savings
-                    }}</span>
+                <span class="text-[12px] font-semibold text-[#175CD3] bg-[#EFF8FF] border border-[#B2DDFF] px-2.5 py-0.5 rounded-full">
+                    {{ plan().savings }} off
+                </span>
                 }
             </div>
             <div class="flex items-baseline gap-2">
-                <span class="text-3xl/[38px] font-semibold text-[#C63C92]">৳{{ plan().price
-                    }}</span>
+                <span class="text-[32px] font-bold text-[#C63C92] flex items-center gap-1">
+                    <span class="text-[28px]">৳</span>{{ plan().price }}
+                </span>
                 @if(plan().originalPrice){
-                <span class="text-sm text-[#667085] font-medium line-through">৳ {{ plan().originalPrice }}</span>
+                <span class="text-[18px] text-[#98A2B3] font-normal line-through">৳{{ plan().originalPrice }}</span>
                 }
             </div>
-
+            <p class="text-[15px] text-[#667085] font-normal">Limits reset every month</p>
         </div>
-        <button
-            class="w-full py-3 text-white px-4 text-[16px] font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-700 transition-colors">
-            {{ plan().buttonText }}
+    </div>
+
+    <div class="flex flex-col gap-5 flex-grow">
+        <div class="flex flex-col gap-[14px]">
+            @for(feature of plan().features; track $index){
+            <div class="flex justify-between items-center text-[15px]">
+                <span class="text-[#344054] font-semibold border-b border-dashed border-[#D0D5DD] pb-0.5 cursor-help">
+                    {{ feature.label }}
+                    @if(feature.isNew){
+                    <span class="ml-1 px-2 py-0.5 rounded-full text-[10px] bg-[#EFF8FF] text-[#175CD3] border border-[#B2DDFF]">New</span>
+                    }
+                </span>
+                <span class="font-bold text-[#101828] shrink-0">
+                    @switch(feature.value){
+                    @case(true){
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 4.5L6.75 12.75L3 9" stroke="#98A2B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    }
+                    @case(false){
+                    <span class="text-gray-300">✕</span>
+                    }
+                    @default{
+                    {{ feature.value }}
+                    }
+                    }
+                </span>
+            </div>
+            }
+        </div>
+        
+        <button class="text-[15px] font-bold text-[#101828] underline underline-offset-4 w-fit hover:text-[#B32D7D] transition-colors">
+            See more
         </button>
     </div>
-    <div class="flex flex-col gap-[12px]">
-        @for(feature of plan().features; track $index){
-        <div class="flex justify-between items-center text-sm">
-            <span class="text-[#344054] text-sm font-semibold"> {{ feature.label }}
-                @if(feature.isNew){
-                <span
-                    class="ml-1 px-1.5 py-0.5 border border-[#B2DDFF] rounded-full text-[12px] bg-[#EFF8FF] text-[#175CD3] rounded">New
-                </span>
-                }
-            </span>
-            <span class="font-medium text-gray-800">
-                @switch(feature.value){
-                @case(true){
-                <span class="text-pink-500">✓</span>
-                }
-                @case(false){
-                <span class="text-gray-300">✕</span>
-                }
-                @default{
-                <span class="text-sm font-bold text-[#101828]"> {{ feature.value }} </span>
-                }
-                }
-            </span>
-        </div>
-        }
-    </div>
-    <!-- <ul class="space-y-4 flex-grow">
-    @for(feature of plan().features; track $index){
-    <li class="flex justify-between items-center text-sm">
-        <span class="text-gray-600"> {{ feature.label }} 
-            @if(feature.isNew){
-            <span class="ml-1 px-1.5 py-0.5 text-[10px] bg-blue-100 text-blue-600 rounded">New </span>
-            }
-        </span>
-        <span class="font-medium text-gray-800">
-            @switch(feature.value){
-            @case(true){
-            <span class="text-pink-500">✓</span>
-            }
-            @case(false){
-            <span class="text-gray-300">✕</span>
-            }
-            @default{
-            <span> {{ feature.value }} </span>
-            }
-            }
-        </span>
-    </li>
-    }
-</ul> -->
-    <button class="text-base font-semibold text-[#B32D7D] flex items-center justify-center gap-1">
-        Compare all plans
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M5 7.5L10 12.5L15 7.5" stroke="#B32D7D" stroke-width="1.66667" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-        </span>
-    </button>
-</div>
-<div>
 
+    <button
+        class="w-full py-4 text-white px-4 text-[18px] font-bold rounded-xl bg-[#10B981] hover:bg-[#059669] transition-all duration-200 mt-auto shadow-sm active:scale-[0.98]">
+        {{ plan().buttonText }}
+    </button>
 </div>

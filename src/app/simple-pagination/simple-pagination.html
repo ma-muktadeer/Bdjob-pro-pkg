@@ -1,0 +1,11 @@
+<div class="flex items-center justify-center gap-2 pb-4">
+    @for (index of totalPagesArray(); track index) {
+    <div class="h-2 rounded-full transition-all duration-300 ease-in-out cursor-pointer"
+        (click)="pageChange.emit(index)" 
+        [class.w-8]="activeIndex() === index"
+        [class.bg-[#C63C92]]="activeIndex() === index" 
+        [class.w-2]="activeIndex() !== index"
+        [class.bg-[#D1D5DB]]="activeIndex() !== index">
+    </div>
+    }
+</div>

@@ -7,10 +7,11 @@ import { CareerGrid } from "./career-grid/career-grid";
 import { FaqAsk } from "./faq-ask/faq-ask";
 import { FeedbackDrawer } from "./feedback-drawer/feedback-drawer";
 import { FeedbackForm } from "./feedback-form/feedback-form";
+import { PricingPlanList } from "./pricing-plan-list/pricing-plan-list";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FeedbackForm, PricingPlan, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer],
+  imports: [RouterOutlet, FeedbackForm, PricingPlan, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer, PricingPlanList],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

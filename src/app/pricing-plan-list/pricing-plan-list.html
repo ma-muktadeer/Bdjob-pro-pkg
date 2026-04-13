@@ -1,0 +1,41 @@
+<div class="py-6 overflow-hidden">
+    @if(isHandset()){
+    @defer ( on idle) {
+    <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-4 px-[32px] pb-6 relative" #carousel
+        (scroll)="onScroll($event)">
+        @for(plan of extendedPlans(); track $index){
+        <div class="snap-center shrink-0 w-[calc(100vw-64px)] max-w-[400px]">
+            <app-pricing-plan [plan]="plan" />
+        </div>
+        }
+    </div>
+
+    <div class="mt-2">
+        <app-simple-pagination [totalPages]="plans().length" [activeIndex]="activeIndex()"
+            (pageChange)="onPageChange($event)"></app-simple-pagination>
+    </div>
+    <div class="mt-12 flex flex-col items-center gap-4 px-6 mb-8 text-center">
+        <div class="flex items-center justify-center gap-2 text-[#475467] font-medium">
+            <span class="text-[16px]">Need Help</span>
+            <div class="flex items-center gap-2 text-[#D92D20]">
+                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M18.3333 14.1V16.6C18.3342 16.8321 18.2868 17.0617 18.1942 17.2739C18.1017 17.4862 17.966 17.6765 17.7958 17.8322C17.6256 17.9879 17.4246 18.1055 17.2057 18.1776C16.9868 18.2497 16.7548 18.2747 16.525 18.2508C13.9823 18.0031 11.5361 17.1352 9.38334 15.7167C7.38706 14.4143 5.6987 12.7259 4.3963 10.7297C2.96913 8.56455 2.10116 6.10427 1.86146 3.54717C1.83756 3.31802 1.86236 3.08657 1.93427 2.86811C2.00619 2.64964 2.12361 2.44911 2.279 2.27926C2.43439 2.10941 2.62431 1.97395 2.83633 1.88147C3.04835 1.78898 3.27783 1.74149 3.50979 1.74201H6.00979C6.41727 1.7379 6.81134 1.88582 7.11475 2.15668C7.41817 2.42754 7.60959 2.79375 7.65146 3.18383C7.72944 3.96195 7.91974 4.72462 8.21687 5.45217C8.32623 5.71987 8.35639 6.01429 8.30378 6.3001C8.25117 6.58591 8.11818 6.85025 7.92083 7.06175L6.86249 8.12008C8.06734 10.2393 9.81409 11.9861 11.9333 13.1909L12.9917 12.1326C13.2032 11.9352 13.4675 11.8023 13.7533 11.7496C14.0391 11.697 14.3336 11.7272 14.6013 11.8365C15.3288 12.1336 16.0915 12.3239 16.8696 12.4019C17.2618 12.4441 17.6295 12.6373 17.9008 12.944C18.172 13.2507 18.321 13.6444 18.3181 14.0506L18.3333 14.1Z"
+                        stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <span class="text-[18px] font-bold">09638666444 or 01897627858</span>
+            </div>
+        </div>
+    </div>
+    }
+    }
+    @else{
+    @defer ( on idle) {
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pt-4 mb-5">
+        @for(plan of plans(); track $index){
+        <app-pricing-plan [plan]="plan" />
+        }
+    </div>
+    }
+    }
+</div>
