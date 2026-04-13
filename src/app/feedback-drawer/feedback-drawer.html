@@ -19,6 +19,30 @@
     </div>
 </button>
 @if (isOpen()) {
+<div (click)="toggleDrawer()" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40" animate.enter="fade-enter"
+    animate.leave="fade-leave">
+</div>
+
+<div class="fixed top-0 right-0 h-full w-full max-w-[450px] bg-white z-50 shadow-2xl border-l border-gray-100"
+    animate.enter="slide-enter" animate.leave="slide-leave">
+
+    <div class="h-full flex flex-col font-sans">
+        <div class="p-6 border-b border-gray-100">
+            <h2 class="text-[18px] font-bold text-[#101828]">Help us improve bdjobs recruiter website</h2>
+        </div>
+        <div class="p-8 flex-grow overflow-y-auto space-y-6">
+            <p class="text-gray-500">Your feedback form goes here.</p>
+        </div>
+        <div class="p-8 border-t border-gray-50">
+            <button
+                class="w-full bg-[#00965e] text-white py-4 rounded-lg font-bold hover:bg-[#007a4d] transition-colors">
+                Submit feedback
+            </button>
+        </div>
+    </div>
+</div>
+}
+<!-- @if (isOpen()) {
 <div (click)="toggleDrawer()" class="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 transition-opacity"></div>
 }
 @defer (when isOpen()) {
@@ -40,4 +64,4 @@
         </div>
     </div>
 </div>
-}
+} -->

@@ -1,3 +1,4 @@
+@defer(on viewport; on idle) {
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pt-4 mb-5">
   @for(plan of plans; track $index){
   <app-pricing-plan [plan]="plan" />
@@ -31,7 +32,11 @@
 <app-feedback-drawer>
   <app-feedback-form />
 </app-feedback-drawer>
-
+}@placeholder {
+<div class="flex items-center justify-center h-screen">
+  <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-[#D92D20]"></div>
+</div>
+}
 <router-outlet />
 
 <!-- <button (click)="toggleDrawer()"
