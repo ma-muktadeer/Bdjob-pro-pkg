@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PricingPlanInterface } from './interfaces/card.interfaces';
-import { PricingPlan } from "./pricing-plan/pricing-plan";
 import { ComparePlans } from "./compare-plans/compare-plans";
 import { CareerGrid } from "./career-grid/career-grid";
 import { FaqAsk } from "./faq-ask/faq-ask";
@@ -11,7 +10,7 @@ import { PricingPlanList } from "./pricing-plan-list/pricing-plan-list";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FeedbackForm, PricingPlan, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer, PricingPlanList],
+  imports: [RouterOutlet, FeedbackForm, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer, PricingPlanList],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
