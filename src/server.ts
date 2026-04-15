@@ -6,7 +6,8 @@ import {
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
-
+import { request } from 'https';
+import { hostname } from 'node:os';
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
@@ -23,6 +24,41 @@ const angularApp = new AngularNodeAppEngine();
  * });
  * ```
  */
+
+app.use('/api-bd', (req, res) => {
+  const target = req.url.replace(/^\/api-bd/, '');
+
+  const options = {
+    hostname: 'api.bdjobs.com',
+    port: 443,
+    path: target,
+    method: req.method,
+    headers: {
+      ...req.headers,
+      host: 'api.bdjobs.com',
+      origin: 'https://bdjobs.com',
+      referer: 'https://bdjobs.com/'
+    }
+  };
+  const proxyReq = request(options, (proxyRes) => {
+    // ২. বিডিজবস থেকে আসা রেসপন্স হেডারে CORS পারমিশন যোগ করা
+    res.writeHead(proxyRes.statusCode || 200, {
+      ...proxyRes.headers,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS',
+      'Access-Control-Allow-Headers': '*'
+    });
+    proxyRes.pipe(res);
+  });
+
+  proxyReq.on('error', (err) => {
+    console.error('Proxy Error:', err);
+    res.status(500).send('Proxy Error');
+  });
+
+  // ৩. ব্রাউজার থেকে পাঠানো ডাটা (Body) থাকলে তা ফরোয়ার্ড করা
+  req.pipe(proxyReq);
+})
 
 /**
  * Serve static files from /browser
