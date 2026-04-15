@@ -1,5 +1,6 @@
 @defer(on viewport; on idle) {
 <app-pricing-plan-list [plans]="plans" />
+{{pkgInf() | json}}
 
 <div class="flex flex-row gap-2 justify-center">
   <div class="text-sm font-semibold text-[#667085]">Need Help?</div>

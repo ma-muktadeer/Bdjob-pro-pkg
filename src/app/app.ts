@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { PricingPlanInterface } from './interfaces/card.interfaces';
 import { ComparePlans } from "./compare-plans/compare-plans";
@@ -7,14 +7,18 @@ import { FaqAsk } from "./faq-ask/faq-ask";
 import { FeedbackDrawer } from "./feedback-drawer/feedback-drawer";
 import { FeedbackForm } from "./feedback-form/feedback-form";
 import { PricingPlanList } from "./pricing-plan-list/pricing-plan-list";
+import { PackageInfoService } from './services/package-info.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FeedbackForm, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer, PricingPlanList],
+  imports: [RouterOutlet, FeedbackForm, ComparePlans, CareerGrid, FaqAsk, FeedbackDrawer, PricingPlanList, JsonPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  private readonly packageInfoService = inject(PackageInfoService);
   protected readonly title = signal('bdjob-pro-pkg');
   plans: PricingPlanInterface[] = [
     {
@@ -58,6 +62,11 @@ export class App {
   // Define the state as a signal
   isDrawerOpen = signal(false);
 
+  protected pkgInf = toSignal(this.packageInfoService.getPackageDetails('', '', 'web'));
+
+  ngOnInit() {
+    console.log('pkg inf', this.pkgInf());
+  }
   toggleDrawer() {
     // Toggle the signal value
     this.isDrawerOpen.update(value => !value);
