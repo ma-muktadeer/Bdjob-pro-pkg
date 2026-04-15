@@ -1,0 +1,11 @@
+{
+    "/api-bd": {
+        "target": "https://api.bdjobs.com",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api-bd": ""
+        },
+        "logLevel": "debug"
+    }
+}
