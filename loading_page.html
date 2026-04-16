@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bdjobs Pro – Skeleton</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f7f7f7; color: #222; }
+
+  @keyframes shimmer {
+    0%   { background-position: -800px 0; }
+    100% { background-position:  800px 0; }
+  }
+  .sk {
+    background: linear-gradient(90deg, #e8e8e8 25%, #f4f4f4 50%, #e8e8e8 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.6s infinite;
+    border-radius: 6px;
+    display: block;
+  }
+
+  .wrap     { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  .row      { display: flex; align-items: center; gap: 12px; }
+  .col      { display: flex; flex-direction: column; gap: 8px; }
+  section   { margin-bottom: 48px; }
+
+  /* ── Navbar ── */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 14px 0;
+    margin-bottom: 36px;
+  }
+  nav .inner { display: flex; align-items: center; justify-content: space-between; }
+
+  /* ── Pricing cards ── */
+  .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .price-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px 16px;
+    background: #fff;
+  }
+  .price-card.featured { border: 2px solid #4a90d9; }
+
+  /* ── Feature comparison table ── */
+  .cmp-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 11px 10px;
+    border-bottom: 1px solid #ebebeb;
+    align-items: center;
+  }
+
+  /* ── Feature grid ── */
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .feat-card { border: 1px solid #e5e5e5; border-radius: 12px; overflow: hidden; background: #fff; }
+
+  /* ── FAQ ── */
+  .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .faq-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 16px; border: 1px solid #e5e5e5; border-radius: 8px;
+    background: #fff; gap: 10px;
+  }
+
+  /* ── Footer ── */
+  footer { background: #fff; border-top: 1px solid #e5e5e5; padding: 32px 0 20px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr; gap: 24px; margin-bottom: 24px; }
+  .partners { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid #ebebeb; }
+</style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav>
+  <div class="wrap">
+    <div class="inner">
+      <span class="sk" style="width:96px;height:28px"></span>
+      <div class="row">
+        <span class="sk" style="width:46px;height:12px"></span>
+        <span class="sk" style="width:38px;height:12px"></span>
+        <span class="sk" style="width:58px;height:12px"></span>
+        <span class="sk" style="width:48px;height:12px"></span>
+        <span class="sk" style="width:54px;height:12px"></span>
+        <span class="sk" style="width:34px;height:34px;border-radius:50%"></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <!-- ── Hero / Pricing ── -->
+  <section style="text-align:center">
+    <span class="sk" style="width:56%;height:28px;margin:0 auto 14px"></span>
+    <span class="sk" style="width:40%;height:13px;margin:0 auto 26px"></span>
+    <!-- billing toggle -->
+    <div class="row" style="justify-content:center;gap:8px;margin-bottom:28px">
+      <span class="sk" style="width:80px;height:34px;border-radius:20px"></span>
+      <span class="sk" style="width:92px;height:34px;border-radius:20px"></span>
+      <span class="sk" style="width:80px;height:34px;border-radius:20px"></span>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="price-card">
+        <span class="sk" style="width:48%;height:12px;margin-bottom:8px"></span>
+        <span class="sk" style="width:44%;height:28px;margin-bottom:16px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px;margin-bottom:16px"></span>
+        <div class="col"><span class="sk" style="width:90%;height:11px"></span><span class="sk" style="width:82%;height:11px"></span><span class="sk" style="width:86%;height:11px"></span><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:88%;height:11px"></span><span class="sk" style="width:66%;height:11px"></span><span class="sk" style="width:56%;height:11px"></span></div>
+      </div>
+      <!-- Basic -->
+      <div class="price-card">
+        <span class="sk" style="width:48%;height:12px;margin-bottom:8px"></span>
+        <span class="sk" style="width:44%;height:28px;margin-bottom:16px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px;margin-bottom:16px"></span>
+        <div class="col"><span class="sk" style="width:90%;height:11px"></span><span class="sk" style="width:82%;height:11px"></span><span class="sk" style="width:86%;height:11px"></span><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:88%;height:11px"></span><span class="sk" style="width:66%;height:11px"></span><span class="sk" style="width:56%;height:11px"></span></div>
+      </div>
+      <!-- Standard (featured) -->
+      <div class="price-card featured">
+        <span class="sk" style="width:86px;height:20px;border-radius:20px;margin:0 auto 8px"></span>
+        <span class="sk" style="width:48%;height:12px;margin-bottom:8px"></span>
+        <span class="sk" style="width:44%;height:28px;margin-bottom:16px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px;margin-bottom:16px"></span>
+        <div class="col"><span class="sk" style="width:90%;height:11px"></span><span class="sk" style="width:82%;height:11px"></span><span class="sk" style="width:86%;height:11px"></span><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:88%;height:11px"></span><span class="sk" style="width:66%;height:11px"></span><span class="sk" style="width:56%;height:11px"></span></div>
+      </div>
+      <!-- Premium -->
+      <div class="price-card">
+        <span class="sk" style="width:48%;height:12px;margin-bottom:8px"></span>
+        <span class="sk" style="width:44%;height:28px;margin-bottom:16px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px;margin-bottom:16px"></span>
+        <div class="col"><span class="sk" style="width:90%;height:11px"></span><span class="sk" style="width:82%;height:11px"></span><span class="sk" style="width:86%;height:11px"></span><span class="sk" style="width:72%;height:11px"></span><span class="sk" style="width:88%;height:11px"></span><span class="sk" style="width:66%;height:11px"></span><span class="sk" style="width:56%;height:11px"></span></div>
+      </div>
+    </div>
+
+    <span class="sk" style="width:32%;height:12px;margin:20px auto 0"></span>
+  </section>
+
+  <!-- ── Compare Plans Table ── -->
+  <section>
+    <span class="sk" style="width:30%;height:22px;margin-bottom:18px"></span>
+    <div class="row" style="margin-bottom:14px;gap:8px">
+      <span class="sk" style="width:68px;height:28px;border-radius:20px"></span>
+      <span class="sk" style="width:84px;height:28px;border-radius:20px"></span>
+      <span class="sk" style="width:78px;height:28px;border-radius:20px"></span>
+    </div>
+
+    <!-- header row -->
+    <div class="cmp-row" style="background:#fafafa">
+      <div></div>
+      <span class="sk" style="height:18px"></span>
+      <span class="sk" style="height:18px"></span>
+      <span class="sk" style="height:18px"></span>
+      <span class="sk" style="height:18px"></span>
+    </div>
+    <!-- price row -->
+    <div class="cmp-row">
+      <div></div>
+      <span class="sk" style="height:24px"></span>
+      <span class="sk" style="height:24px"></span>
+      <span class="sk" style="height:24px"></span>
+      <span class="sk" style="height:24px"></span>
+    </div>
+    <!-- button row -->
+    <div class="cmp-row">
+      <div></div>
+      <span class="sk" style="height:32px;border-radius:7px"></span>
+      <span class="sk" style="height:32px;border-radius:7px"></span>
+      <span class="sk" style="height:32px;border-radius:7px"></span>
+      <span class="sk" style="height:32px;border-radius:7px"></span>
+    </div>
+    <!-- feature rows -->
+    <div id="cmp-rows"></div>
+  </section>
+
+  <!-- ── How Bdjobs Pro Simplifies ── -->
+  <section>
+    <span class="sk" style="width:38%;height:22px;margin-bottom:20px"></span>
+    <div class="feat-grid" id="feat-grid"></div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section>
+    <span class="sk" style="width:26%;height:22px;margin-bottom:18px"></span>
+    <div class="faq-grid" id="faq-grid"></div>
+  </section>
+
+</div><!-- /wrap -->
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="col">
+        <span class="sk" style="width:78px;height:24px"></span>
+        <span class="sk" style="width:88%;height:12px"></span>
+        <span class="sk" style="width:70%;height:12px"></span>
+        <span class="sk" style="width:58%;height:12px"></span>
+      </div>
+      <div class="col">
+        <span class="sk" style="width:58%;height:14px"></span>
+        <span class="sk" style="width:80%;height:12px"></span>
+        <span class="sk" style="width:72%;height:12px"></span>
+        <span class="sk" style="width:76%;height:12px"></span>
+        <span class="sk" style="width:64%;height:12px"></span>
+      </div>
+      <div class="col">
+        <span class="sk" style="width:58%;height:14px"></span>
+        <span class="sk" style="width:80%;height:12px"></span>
+        <span class="sk" style="width:72%;height:12px"></span>
+        <span class="sk" style="width:76%;height:12px"></span>
+        <span class="sk" style="width:64%;height:12px"></span>
+      </div>
+      <div class="col">
+        <span class="sk" style="width:58%;height:14px"></span>
+        <span class="sk" style="width:80%;height:12px"></span>
+        <span class="sk" style="width:72%;height:12px"></span>
+        <span class="sk" style="width:64%;height:12px"></span>
+      </div>
+      <div class="col">
+        <span class="sk" style="width:66%;height:14px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px"></span>
+        <span class="sk" style="width:66%;height:14px"></span>
+        <span class="sk" style="width:100%;height:36px;border-radius:8px"></span>
+      </div>
+    </div>
+    <div class="partners" id="partners"></div>
+    <div class="footer-bottom">
+      <span class="sk" style="width:28%;height:12px"></span>
+      <div class="row" style="gap:8px" id="socials"></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // comparison feature rows
+  const cmpEl = document.getElementById('cmp-rows');
+  const widths = [65,72,58,68,80,62,74,70,66,76,60,68];
+  for (let i = 0; i < 12; i++) {
+    const r = document.createElement('div');
+    r.className = 'cmp-row';
+    r.innerHTML = `<span class="sk" style="width:${widths[i]}%;height:12px"></span>`
+      + Array(4).fill('<span class="sk" style="width:18px;height:18px;border-radius:50%;margin:0 auto"></span>').join('');
+    cmpEl.appendChild(r);
+  }
+
+  // feature cards
+  const fg = document.getElementById('feat-grid');
+  for (let i = 0; i < 9; i++) {
+    const c = document.createElement('div');
+    c.className = 'feat-card';
+    c.innerHTML = `<span class="sk" style="display:block;width:100%;height:140px;border-radius:0"></span>
+      <div style="padding:12px 14px">
+        <span class="sk" style="width:60%;height:13px;margin-bottom:8px"></span>
+        <span class="sk" style="width:95%;height:11px;margin-bottom:5px"></span>
+        <span class="sk" style="width:78%;height:11px"></span>
+      </div>`;
+    fg.appendChild(c);
+  }
+
+  // FAQ items
+  const fq = document.getElementById('faq-grid');
+  const fw = [68,78,62,72,82,58,70,65];
+  for (let i = 0; i < 8; i++) {
+    const item = document.createElement('div');
+    item.className = 'faq-item';
+    item.innerHTML = `<span class="sk" style="height:12px;width:${fw[i]}%"></span>
+      <span class="sk" style="width:16px;height:16px;border-radius:50%;flex-shrink:0"></span>`;
+    fq.appendChild(item);
+  }
+
+  // partner logos
+  const pl = document.getElementById('partners');
+  for (let i = 0; i < 10; i++) {
+    const l = document.createElement('span');
+    l.className = 'sk';
+    l.style.cssText = `width:${50 + Math.floor(Math.random()*30)}px;height:22px;border-radius:4px`;
+    pl.appendChild(l);
+  }
+
+  // social icons
+  const sc = document.getElementById('socials');
+  for (let i = 0; i < 5; i++) {
+    const s = document.createElement('span');
+    s.className = 'sk';
+    s.style.cssText = 'width:28px;height:28px;border-radius:50%';
+    sc.appendChild(s);
+  }
+</script>
+</body>
+</html>
